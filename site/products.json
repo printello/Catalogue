@@ -328,6 +328,50 @@
   ]
  },
  {
+  "category": "hoodies",
+  "categoryLabel": "Hoodies",
+  "name": "Zipper Hoodie",
+  "spec": "",
+  "image": "images/zipper-hoodie-navy-blue.jpg",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "image": "images/zipper-hoodie-navy-blue.jpg"
+   },
+   {
+    "name": "Black",
+    "image": "images/zipper-hoodie-black.jpg"
+   }
+  ],
+  "prices": {
+   "1-10": 1099,
+   "11-20": 899,
+   "21+": 799
+  }
+ },
+ {
+  "category": "hoodies",
+  "categoryLabel": "Hoodies",
+  "name": "Zipless Hoodie",
+  "spec": "",
+  "image": "images/zipless-hoodie-navy-blue.jpg",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "image": "images/zipless-hoodie-navy-blue.jpg"
+   },
+   {
+    "name": "Black",
+    "image": "images/zipless-hoodie-black.jpg"
+   }
+  ],
+  "prices": {
+   "1-10": 999,
+   "11-20": 799,
+   "21+": 699
+  }
+ },
+ {
   "category": "jackets",
   "categoryLabel": "Jackets",
   "name": "2 In 1 Zipper",
@@ -378,6 +422,19 @@
    {
     "name": "Black",
     "image": "images/2025_01_293.jpg"
+   }
+  ]
+ },
+ {
+  "category": "jackets",
+  "categoryLabel": "Jackets",
+  "name": "Sleeveless Jacket",
+  "spec": "",
+  "image": "images/sleeveless-jacket-black.jpg",
+  "colors": [
+   {
+    "name": "Black",
+    "image": "images/sleeveless-jacket-black.jpg"
    }
   ]
  },
