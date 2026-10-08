@@ -1,0 +1,4 @@
+# supplier/price source files (contain cost prices) - never publish
+pricing/
+.DS_Store
+tools/

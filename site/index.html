@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Printello Catalogue</title>
+<style>
+:root{--bg:#fafaf8;--ink:#17171a;--mute:#6b6b73;--line:#e6e5e0;--card:#fff;--accent:#17171a}
+@media (prefers-color-scheme:dark){:root{--bg:#121214;--ink:#f1f0ec;--mute:#9a9aa3;--line:#2a2a2e;--card:#1b1b1e;--accent:#f1f0ec}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:28px 16px 8px;max-width:1200px;margin:auto}
+h1{margin:0;font-size:28px;letter-spacing:-.02em}
+header p{margin:4px 0 0;color:var(--mute)}
+nav{position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:1px solid var(--line)}
+.tabs{max-width:1200px;margin:auto;padding:12px 16px;display:flex;gap:8px;overflow-x:auto}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:99px;font:inherit;font-size:14px;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+main{max-width:1200px;margin:auto;padding:20px 16px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;text-align:left;padding:0;color:inherit;font:inherit}
+.card:hover{border-color:var(--ink)}
+.card .ph{aspect-ratio:4/5;background:#ecebe6;overflow:hidden}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card .b{padding:12px 14px 14px}
+.card h2{margin:0;font-size:17px}
+.card .s{color:var(--mute);font-size:13px;margin-top:2px}
+.dots{display:flex;gap:4px;margin-top:10px;align-items:center;color:var(--mute);font-size:12px}
+.dots img{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
+dialog{border:0;border-radius:16px;padding:0;max-width:880px;width:calc(100% - 32px);background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+.m{display:grid;grid-template-columns:1.1fr 1fr}
+@media(max-width:700px){.m{grid-template-columns:1fr}}
+.m .big{background:#ecebe6;aspect-ratio:4/5}
+.m .big img{width:100%;height:100%;object-fit:cover;display:block}
+.m .info{padding:22px;max-height:80vh;overflow:auto}
+.m h2{margin:0 0 4px}
+.m .cat{color:var(--mute);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px;margin-top:16px}
+.sw button{border:2px solid transparent;background:none;padding:0;cursor:pointer;color:var(--ink);font-size:11px;text-align:center;border-radius:10px}
+.sw button[aria-pressed=true]{border-color:var(--ink)}
+.sw img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block}
+.price{margin-top:8px;font-weight:600;font-size:15px}
+.price small{font-weight:400;color:var(--mute)}
+.pt{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}
+.pt th,.pt td{border:1px solid var(--line);padding:7px 6px;text-align:center}
+.pt th{background:var(--bg);font-weight:500;color:var(--mute)}
+.pt td{font-weight:600}
+.notes{margin:10px 0 0;padding-left:18px;color:var(--mute);font-size:12.5px}
+.sz{margin-top:14px;font-size:14px}.sz summary{cursor:pointer;font-weight:600}
+.ask{margin-top:14px;font-size:14px}
+.x{position:absolute;top:10px;right:12px;border:0;background:var(--card);color:var(--ink);width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}
+dialog{position:fixed}
+</style>
+</head>
+<body>
+<header><h1>Printello Catalogue</h1><p>Custom-printed apparel. Tap a product to see every colour.</p></header>
+<nav><div class="tabs" id="tabs"></div></nav>
+<main id="grid"></main>
+<dialog id="dlg"><button class="x" aria-label="Close" onclick="dlg.close()">×</button><div class="m"><div class="big"><img id="bigimg" alt=""></div><div class="info" id="info"></div></div></dialog>
+<script src="data.js"></script>
+<script>
+const P=window.PRODUCTS,$=id=>document.getElementById(id);
+const cats=[['all','All'],...[...new Map(P.map(p=>[p.category,p.categoryLabel]))]];
+let cur='all';
+$('tabs').innerHTML=cats.map(([k,l])=>`<button data-k="${k}" aria-pressed="${k==='all'}">${l}</button>`).join('');
+$('tabs').onclick=e=>{const k=e.target.dataset.k;if(!k)return;cur=k;[...$('tabs').children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));render()};
+function render(){
+  $('grid').innerHTML=P.map((p,i)=>({p,i})).filter(({p})=>cur==='all'||p.category===cur).map(({p,i})=>`
+  <button class="card" data-i="${i}"><div class="ph"><img loading="lazy" src="${p.image}" alt="${p.name}"></div>
+  <div class="b"><h2>${p.name}</h2><div class="s">${p.spec}</div>
+  <div class="price">${p.prices?`From ₹${Object.values(p.prices)[0]} <small>/ piece + GST</small>`:`<small>Price on request</small>`}</div>
+  <div class="dots">${p.colors.slice(0,6).map(c=>`<img loading="lazy" src="${c.image}" alt="">`).join('')}${p.colors.length>6?`+${p.colors.length-6}`:''}</div></div></button>`).join('');
+}
+$('grid').onclick=e=>{const c=e.target.closest('.card');if(c)open(+c.dataset.i)};
+function sizeBlock(p){
+  const c=p.sizeChart;if(!c)return '';
+  return `<details class="sz"><summary>Size chart</summary><table class="pt"><tr>${c.cols.map(x=>`<th>${x}</th>`).join('')}</tr>${c.rows.map(r=>`<tr>${r.map(v=>`<td style="font-weight:400">${v}</td>`).join('')}</tr>`).join('')}</table><p class="notes" style="padding:0;margin-top:6px">${c.note}</p></details>`;
+}
+function priceBlock(p){
+  if(!p.prices)return `<p class="ask">Pricing on request. Call <b>9503085155 / 9503185155</b>.</p>`;
+  const k=Object.keys(p.prices);
+  return `<table class="pt"><tr><th>Qty</th>${k.map(x=>`<th>${x}</th>`).join('')}</tr><tr><td style="font-weight:400">Per piece</td>${k.map(x=>`<td>₹${p.prices[x]}</td>`).join('')}</tr></table>
+  <ul class="notes">${p.sample?`<li>Includes chest logo print, up to 3.5 in wide.</li>`:''}<li>Prices are approximate and may change with the design.</li><li>GST 5% extra.</li>${p.sample?`<li>Embroidery charged extra.</li>`:''}<li>Transportation charged extra, based on delivery location.</li>${p.sample?`<li>Blank sample ₹${p.sample} per piece, fully refundable if returned in good condition within 7 days.</li>`:''}<li>Exact pricing: <b>9503085155 / 9503185155</b></li></ul>`;
+}
+function open(i){
+  const p=P[i];
+  $('info').innerHTML=`<div class="cat">${p.categoryLabel}</div><h2>${p.name}</h2><div class="s" style="color:var(--mute)">${p.spec}</div>
+  ${priceBlock(p)}${sizeBlock(p)}<p style="margin:14px 0 0;font-size:14px"><b id="cn">${p.colors[0]?p.colors[0].name:''}</b></p>
+  <div class="sw">${p.colors.map((c,j)=>`<button data-j="${j}" aria-pressed="${j===0}"><img loading="lazy" src="${c.image}" alt="${c.name}">${c.name}</button>`).join('')}</div>`;
+  $('bigimg').src=p.colors[0]?p.colors[0].image:p.image;
+  $('info').onclick=e=>{const b=e.target.closest('button[data-j]');if(!b)return;const c=p.colors[+b.dataset.j];
+    $('bigimg').src=c.image;$('cn').textContent=c.name;[...document.querySelectorAll('.sw button')].forEach(x=>x.setAttribute('aria-pressed',x===b))};
+  dlg.showModal();
+}
+dlg.onclick=e=>{if(e.target===dlg)dlg.close()};
+render();
+</script>
+</body>
+</html>
