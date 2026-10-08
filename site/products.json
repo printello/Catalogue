@@ -301,35 +301,6 @@
  {
   "category": "hoodies",
   "categoryLabel": "Hoodies",
-  "name": "Hoodies",
-  "spec": "300 GSM | 60%-40% Sustainable Fleece",
-  "image": "images/2025_01_313.jpg",
-  "colors": [
-   {
-    "name": "Classic Hoodies",
-    "image": "images/2026_03_121.jpg"
-   },
-   {
-    "name": "Charcoal Mel",
-    "image": "images/2026_03_3-Web.jpg"
-   },
-   {
-    "name": "Classic Black",
-    "image": "images/2025_01_3-Web.jpg"
-   },
-   {
-    "name": "French Wine",
-    "image": "images/2025_01_1-Web.jpg"
-   },
-   {
-    "name": "Midnight Navy",
-    "image": "images/2025_01_1-Web-1.jpg"
-   }
-  ]
- },
- {
-  "category": "hoodies",
-  "categoryLabel": "Hoodies",
   "name": "Zipper Hoodie",
   "spec": "",
   "image": "images/zipper-hoodie-navy-blue.jpg",
