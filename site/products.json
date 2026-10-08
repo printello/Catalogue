@@ -168,6 +168,108 @@
   }
  },
  {
+  "category": "crewnecks",
+  "categoryLabel": "Crewnecks",
+  "name": "Bio Wash",
+  "spec": "",
+  "image": "images/bio-wash-navy-blue.jpg",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "image": "images/bio-wash-navy-blue.jpg"
+   },
+   {
+    "name": "Charcoal Melange",
+    "image": "images/bio-wash-charcoal-melange.jpg"
+   },
+   {
+    "name": "White",
+    "image": "images/bio-wash-white.jpg"
+   },
+   {
+    "name": "Lemon Yellow",
+    "image": "images/bio-wash-lemon-yellow.jpg"
+   },
+   {
+    "name": "Red",
+    "image": "images/bio-wash-red.jpg"
+   },
+   {
+    "name": "Royal Blue",
+    "image": "images/bio-wash-royal-blue.jpg"
+   },
+   {
+    "name": "Bottle Green",
+    "image": "images/bio-wash-bottle-green.jpg"
+   },
+   {
+    "name": "Grey Melange",
+    "image": "images/bio-wash-grey-melange.jpg"
+   },
+   {
+    "name": "Maroon",
+    "image": "images/bio-wash-maroon.jpg"
+   },
+   {
+    "name": "Black",
+    "image": "images/bio-wash-black.jpg"
+   }
+  ]
+ },
+ {
+  "category": "crewnecks",
+  "categoryLabel": "Crewnecks",
+  "name": "Super Bio Round Neck",
+  "spec": "",
+  "image": "images/super-bio-round-neck-yellow.jpg",
+  "colors": [
+   {
+    "name": "Yellow",
+    "image": "images/super-bio-round-neck-yellow.jpg"
+   },
+   {
+    "name": "Grey Melange",
+    "image": "images/super-bio-round-neck-grey-melange.jpg"
+   },
+   {
+    "name": "Turquoise Blue",
+    "image": "images/super-bio-round-neck-turquoise-blue.jpg"
+   },
+   {
+    "name": "Navy Blue",
+    "image": "images/super-bio-round-neck-navy-blue.jpg"
+   },
+   {
+    "name": "Royal Blue",
+    "image": "images/super-bio-round-neck-royal-blue.jpg"
+   },
+   {
+    "name": "White",
+    "image": "images/super-bio-round-neck-white.jpg"
+   },
+   {
+    "name": "Charcoal Melange",
+    "image": "images/super-bio-round-neck-charcoal-melange.jpg"
+   },
+   {
+    "name": "Sky Blue",
+    "image": "images/super-bio-round-neck-sky-blue.jpg"
+   },
+   {
+    "name": "Black",
+    "image": "images/super-bio-round-neck-black.jpg"
+   },
+   {
+    "name": "Red",
+    "image": "images/super-bio-round-neck-red.jpg"
+   },
+   {
+    "name": "Deccan Blue",
+    "image": "images/super-bio-round-neck-deccan-blue.jpg"
+   }
+  ]
+ },
+ {
   "category": "oversized",
   "categoryLabel": "Oversized",
   "name": "Oversized Tee",
@@ -683,6 +785,222 @@
    "31-50": 560,
    "50+": 540
   },
+  "sizeChart": {
+   "cols": [
+    "Size",
+    "Chest",
+    "Body length",
+    "Sleeve"
+   ],
+   "note": "All measurements in inches.",
+   "rows": [
+    [
+     "XS",
+     36,
+     25,
+     6.5
+    ],
+    [
+     "S",
+     38,
+     26,
+     7
+    ],
+    [
+     "M",
+     40,
+     27,
+     7.5
+    ],
+    [
+     "L",
+     42,
+     28,
+     8
+    ],
+    [
+     "XL",
+     44,
+     29,
+     8.5
+    ],
+    [
+     "2XL",
+     46,
+     29.5,
+     9
+    ],
+    [
+     "3XL",
+     48,
+     30,
+     9.5
+    ],
+    [
+     "5XL",
+     52,
+     31,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "category": "polos",
+  "categoryLabel": "Polos",
+  "name": "Solid Polo",
+  "spec": "",
+  "image": "images/solid-polo-royal-blue.jpg",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "image": "images/solid-polo-royal-blue.jpg"
+   },
+   {
+    "name": "White Melange",
+    "image": "images/solid-polo-white-melange.jpg"
+   },
+   {
+    "name": "Navy Melange",
+    "image": "images/solid-polo-navy-melange.jpg"
+   },
+   {
+    "name": "Red Melange",
+    "image": "images/solid-polo-red-melange.jpg"
+   },
+   {
+    "name": "Black",
+    "image": "images/solid-polo-black.jpg"
+   },
+   {
+    "name": "Red",
+    "image": "images/solid-polo-red.jpg"
+   },
+   {
+    "name": "Navy Blue",
+    "image": "images/solid-polo-navy-blue.jpg"
+   },
+   {
+    "name": "Royal Blue Melange",
+    "image": "images/solid-polo-royal-blue-melange.jpg"
+   },
+   {
+    "name": "Grey Melange",
+    "image": "images/solid-polo-grey-melange.jpg"
+   },
+   {
+    "name": "Charcoal Melange",
+    "image": "images/solid-polo-charcoal-melange.jpg"
+   }
+  ],
+  "sizeChart": {
+   "cols": [
+    "Size",
+    "Chest",
+    "Body length",
+    "Sleeve"
+   ],
+   "note": "All measurements in inches.",
+   "rows": [
+    [
+     "XS",
+     36,
+     25,
+     6.5
+    ],
+    [
+     "S",
+     38,
+     26,
+     7
+    ],
+    [
+     "M",
+     40,
+     27,
+     7.5
+    ],
+    [
+     "L",
+     42,
+     28,
+     8
+    ],
+    [
+     "XL",
+     44,
+     29,
+     8.5
+    ],
+    [
+     "2XL",
+     46,
+     29.5,
+     9
+    ],
+    [
+     "3XL",
+     48,
+     30,
+     9.5
+    ],
+    [
+     "5XL",
+     52,
+     31,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "category": "polos",
+  "categoryLabel": "Polos",
+  "name": "Tipping Polos",
+  "spec": "",
+  "image": "images/tipping-polos-maroon-with-white.jpg",
+  "colors": [
+   {
+    "name": "Maroon With White",
+    "image": "images/tipping-polos-maroon-with-white.jpg"
+   },
+   {
+    "name": "Black With Red",
+    "image": "images/tipping-polos-black-with-red.jpg"
+   },
+   {
+    "name": "Grey Melange With Black",
+    "image": "images/tipping-polos-grey-melange-with-black.jpg"
+   },
+   {
+    "name": "White With Royal Blue",
+    "image": "images/tipping-polos-white-with-royal-blue.jpg"
+   },
+   {
+    "name": "White Melange With Red",
+    "image": "images/tipping-polos-white-melange-with-red.jpg"
+   },
+   {
+    "name": "Royal Blue With White",
+    "image": "images/tipping-polos-royal-blue-with-white.jpg"
+   },
+   {
+    "name": "Navy Blue With White",
+    "image": "images/tipping-polos-navy-blue-with-white.jpg"
+   },
+   {
+    "name": "Navy Melange With White",
+    "image": "images/tipping-polos-navy-melange-with-white.jpg"
+   },
+   {
+    "name": "Charcoal Melange With White",
+    "image": "images/tipping-polos-charcoal-melange-with-white.jpg"
+   },
+   {
+    "name": "Red With White",
+    "image": "images/tipping-polos-red-with-white.jpg"
+   }
+  ],
   "sizeChart": {
    "cols": [
     "Size",
