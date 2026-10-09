@@ -921,6 +921,12 @@
     "image": "images/solid-polo-charcoal-melange.jpg"
    }
   ],
+  "prices": {
+   "10": 440,
+   "11-30": 430,
+   "31-50": 420,
+   "50+": 400
+  },
   "sizeChart": {
    "cols": [
     "Size",
@@ -1029,6 +1035,12 @@
     "image": "images/tipping-polos-red-with-white.jpg"
    }
   ],
+  "prices": {
+   "10": 440,
+   "11-30": 430,
+   "31-50": 420,
+   "50+": 400
+  },
   "sizeChart": {
    "cols": [
     "Size",
