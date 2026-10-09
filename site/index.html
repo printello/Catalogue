@@ -62,29 +62,55 @@ body{padding-bottom:64px}
 .contact a:hover{border-color:var(--ink)}
 .contact span{display:none}
 @media (max-width:600px){body{padding-bottom:84px}.contact h2{flex:1 1 100%;font-size:13px}.contact div{gap:4px 16px}}
+.nav{max-width:1200px;margin:auto;display:flex;align-items:center;gap:8px;padding-right:16px}
+.nav .tabs{flex:1;min-width:0}
+.sh{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);padding:8px 14px;border-radius:99px;font:inherit;font-size:15px;cursor:pointer}
+.sh svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cs{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;background:var(--card);color:var(--ink);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.cs svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card{position:relative}
+.sh.in{margin-top:14px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:99px;font-size:15px;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+dialog .toast{position:fixed;bottom:24px}
 </style>
 </head>
 <body>
 <header><img class="logo" src="logo.svg" alt="Printello"><h1>Catalogue</h1><p>Custom-printed apparel. Tap a product to see every colour.</p></header>
-<nav><div class="tabs" id="tabs"></div></nav>
+<nav><div class="nav"><div class="tabs" id="tabs"></div><button class="sh" id="catsh" type="button"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span id="catshl">Share</span></button></div></nav><div class="toast" id="toast" role="status"></div>
 <main id="grid"></main>
 <footer class="contact"><div><h2>Contact us</h2><a href="mailto:contactus@printello.in">contactus@printello.in</a><a href="tel:+919503085155">+91 95030 85155</a><a href="tel:+919503185155">+91 95031 85155</a><span>Call or email us for bulk orders, custom printing and quotes. GST 5% extra; transportation charged extra based on delivery location.</span></div></footer>
-<dialog id="dlg"><button class="x" aria-label="Close" onclick="dlg.close()">×</button><div class="m"><div class="big"><img id="bigimg" alt=""></div><div class="info" id="info"></div></div></dialog>
+<dialog id="dlg"><button class="x" aria-label="Close" onclick="dlg.close()">×</button><div class="m"><div class="big"><img id="bigimg" alt=""></div><div class="info" id="info"></div></div><div class="toast" role="status"></div></dialog>
 <script src="data.js"></script>
 <script>
 const P=window.PRODUCTS,$=id=>document.getElementById(id);
 const cats=[['all','All'],...[...new Map(P.map(p=>[p.category,p.categoryLabel]))]];
 let cur='all';
+const slug=n=>n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const base=()=>location.origin+location.pathname;
+function toast(t){const e=($('dlg').open?$('dlg'):document).querySelector('.toast')||$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),1800)}
+async function share(title,url){
+  const text=title+' - Printello';
+  if(navigator.share){try{await navigator.share({title:text,text,url});return}catch(e){if(e.name==='AbortError')return}}
+  try{await navigator.clipboard.writeText(url);toast('Link copied')}
+  catch(e){prompt('Copy this link',url)}
+}
+const catUrl=k=>k==='all'?base():base()+'#'+k;
+const prodUrl=p=>base()+'#p='+slug(p.name);
+function setHash(h){history.replaceState(null,'',h?'#'+h:location.pathname+location.search)}
+function setCat(k){cur=k;[...$('tabs').children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
+  $('catshl').textContent=k==='all'?'Share catalogue':'Share '+cats.find(c=>c[0]===k)[1];render()}
 $('tabs').innerHTML=cats.map(([k,l])=>`<button data-k="${k}" aria-pressed="${k==='all'}">${l}</button>`).join('');
-$('tabs').onclick=e=>{const k=e.target.dataset.k;if(!k)return;cur=k;[...$('tabs').children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));render()};
+$('tabs').onclick=e=>{const k=e.target.dataset.k;if(!k)return;setCat(k);setHash(k==='all'?'':k)};
+$('catsh').onclick=()=>share(cur==='all'?'Catalogue':cats.find(c=>c[0]===cur)[1],catUrl(cur));
 function render(){
   $('grid').innerHTML=P.map((p,i)=>({p,i})).filter(({p})=>cur==='all'||p.category===cur).map(({p,i})=>`
-  <button class="card" data-i="${i}"><div class="ph"><img loading="lazy" src="${p.image}" alt="${p.name}"></div>
+  <button class="card" data-i="${i}"><span class="cs" data-share="${i}" role="button" aria-label="Share ${p.name}"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></span><div class="ph"><img loading="lazy" src="${p.image}" alt="${p.name}"></div>
   <div class="b"><h2>${p.name}</h2><div class="s">${p.spec}</div>
   <div class="price">${p.prices?`From ₹${Object.values(p.prices)[0]} <small>/ piece + GST</small>`:`<small>Price on request</small>`}</div>
   <div class="dots">${p.colors.slice(0,6).map(c=>`<img loading="lazy" src="${c.image}" alt="">`).join('')}${p.colors.length>6?`+${p.colors.length-6}`:''}</div></div></button>`).join('');
 }
-$('grid').onclick=e=>{const c=e.target.closest('.card');if(c)open(+c.dataset.i)};
+$('grid').onclick=e=>{const sb=e.target.closest('[data-share]');if(sb){e.stopPropagation();const p=P[+sb.dataset.share];share(p.name,prodUrl(p));return}const c=e.target.closest('.card');if(c)open(+c.dataset.i)};
 function sizeBlock(p){
   const c=p.sizeChart;if(!c)return '';
   return `<details class="sz"><summary>Size chart</summary><table class="pt"><tr>${c.cols.map(x=>`<th>${x}</th>`).join('')}</tr>${c.rows.map(r=>`<tr>${r.map(v=>`<td style="font-weight:400">${v}</td>`).join('')}</tr>`).join('')}</table><p class="notes" style="padding:0;margin-top:6px">${c.note}</p></details>`;
@@ -99,14 +125,21 @@ function open(i){
   const p=P[i];
   $('info').innerHTML=`<div class="cat">${p.categoryLabel}</div><h2>${p.name}</h2><div class="s" style="color:var(--mute)">${p.spec}</div>
   ${priceBlock(p)}${sizeBlock(p)}<p style="margin:14px 0 0;font-size:15px"><b id="cn">${p.colors[0]?p.colors[0].name:''}</b></p>
+  <button class="sh in" type="button" id="psh"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share ${p.name}</button>
   <div class="sw">${p.colors.map((c,j)=>`<button data-j="${j}" aria-pressed="${j===0}"><img loading="lazy" src="${c.image}" alt="${c.name}">${c.name}</button>`).join('')}</div>`;
   $('bigimg').src=p.colors[0]?p.colors[0].image:p.image;
   $('info').onclick=e=>{const b=e.target.closest('button[data-j]');if(!b)return;const c=p.colors[+b.dataset.j];
     $('bigimg').src=c.image;$('cn').textContent=c.name;[...document.querySelectorAll('.sw button')].forEach(x=>x.setAttribute('aria-pressed',x===b))};
-  dlg.showModal();
+  $('psh').onclick=()=>share(p.name,prodUrl(p));
+  if(!dlg.open)dlg.showModal();
+  setHash('p='+slug(p.name));
 }
 dlg.onclick=e=>{if(e.target===dlg)dlg.close()};
-render();
+dlg.addEventListener('close',()=>setHash(cur==='all'?'':cur));
+function fromHash(){const h=decodeURIComponent(location.hash.slice(1));
+  if(h.startsWith('p=')){const i=P.findIndex(p=>slug(p.name)===h.slice(2));if(i>=0){setCat(P[i].category);open(i);return}}
+  setCat(cats.some(c=>c[0]===h)?h:'all')}
+fromHash();
 </script>
 </body>
 </html>
